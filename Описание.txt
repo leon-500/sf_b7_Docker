@@ -1,0 +1,24 @@
+1. Создаём приложение python, Dockerfile согласно инструкции
+https://docs.docker.com/language/python/build-images/
+
+2. Структура каталога
+python-docker
+|____ app.py
+|____ requirements.txt
+|____ Dockerfile
+
+3. Создаём image
+sudo docker build --tag python-docker .
+
+4. Создаём volume
+sudo docker volume create myapp
+
+5. Проверяем список volume
+sudo docker volume ls
+
+6. Запускаем контейнер, пробрасываем порт tcp/6000 хостовой машины на порт tcp/5000 контейнера. Подключаем volume myapp
+sudo docker run -d -p 6000:5000 -v myapp:/app python-docker
+
+В дальнейшем мы можем работать с volume myapp на хостовой машине:
+хранить файлы загрузки / выгрузки, CSV, PNG ...
+вносить изменения в приложение python
